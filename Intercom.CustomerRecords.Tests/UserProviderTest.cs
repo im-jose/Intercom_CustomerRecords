@@ -13,10 +13,10 @@ namespace Intercom.CustomerRecords.Tests
     public class UserProviderTest
     {
         [Fact]
-        public void GetAllUsers_RetursExpectedResults()
+        public void GetAllUsers_ReturnsExpectedResults()
         {
             var mockJsonParser = new Mock<IUserJsonParser>();
-            mockJsonParser.Setup(x => x.ParseJsonLine(It.IsAny<string>())).Returns(() => new User(1, "JohnDoe"));
+            mockJsonParser.Setup(x => x.ParseJsonLine(It.IsAny<string>())).Returns(() => new User(1, "John Doe"));
 
             IUserProvider userProvider = new UserFileReader(mockJsonParser.Object);
             var result = userProvider.getAllUsers();
@@ -25,10 +25,19 @@ namespace Intercom.CustomerRecords.Tests
             Assert.Equal(32, result.Count);
         }
 
-        //test userJsonParser
+        [Fact]
+        public void ParseJsonCustomer_ReturnsExpectedModelObject()
+        {
+            string json = "{\"latitude\": \"52.986375\", \"user_id\": 12, \"name\": \"Christina McArdle\", \"longitude\": \"-6.043701\"}";
+            IUserJsonParser parser = new UserJsonParser();
+            User result = parser.ParseJsonLine(json);
 
-        //test distanceCalculator
+            Assert.NotNull(result);
+            Assert.Equal("Christina McArdle", result.Name);
+            Assert.Equal(12, result.Id);
+            Assert.Equal(52.986375, result.Location.Latitude);
+            Assert.Equal(-6.043701, result.Location.Longitude);
+        }
 
-        //test userFiltering
     }
 }

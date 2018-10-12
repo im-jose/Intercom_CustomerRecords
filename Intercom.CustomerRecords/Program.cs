@@ -18,6 +18,7 @@ namespace Intercom.CustomerRecords
         {
             //Initialize DI container & register dependencies
             container = new Container();
+            container.Register<IUserJsonParser, UserJsonParser>();
             container.Register<IUserProvider, UserFileReader>();
             container.Register<ICustomerService, CustomerService>();
             container.Register<CustomerController>(() => new CustomerController(container.GetInstance<ICustomerService>()));

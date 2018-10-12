@@ -1,17 +1,16 @@
-﻿using System;
+﻿using Intercom.CustomerRecords.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Intercom.CustomerRecords.Models;
+using System.Configuration;
 using System.IO;
+using System.Linq;
 
 namespace Intercom.CustomerRecords.Misc
 {
     public class UserFileReader : IUserProvider
     {
         private const string FILENAME = "customers.txt";
-        IUserJsonParser userParser;
+        private readonly IUserJsonParser userParser;
 
         public UserFileReader(IUserJsonParser userParser)
         {
@@ -42,6 +41,11 @@ namespace Intercom.CustomerRecords.Misc
         private static string[] ReadUsersFile()
         {
             string filePath = Path.Combine(Environment.CurrentDirectory, @"Data\", FILENAME);
+
+            if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["CustomerFile"]))
+            {
+                filePath = ConfigurationManager.AppSettings["CustomerFile"];
+            }
 
             if(!File.Exists(filePath))
             {
