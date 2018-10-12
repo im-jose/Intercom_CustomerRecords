@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Intercom.CustomerRecords.Models
 {
-    public class User
+    public class Customer
     {
-        public User(int id, string name)
+        public Customer(int id, string name)
         {
             this.Id = id;
             this.Name = name;

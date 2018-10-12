@@ -10,38 +10,38 @@ using Xunit;
 
 namespace Intercom.CustomerRecords.Tests
 {
-    public class UserFilteringTests
+    public class CustomerFilteringTests
     {
         [Fact]
         public void DistanceCriteria_ReturnsExpectedResults()
         {
-            IList<User> initialList = new List<User>();
+            IList<Customer> initialList = new List<Customer>();
 
-            User userA = new User(1, "Jose");
-            User userB = new User(1, "Nataly");
-            User userC = new User(1, "Connor");
+            Customer customerA = new Customer(1, "Jose");
+            Customer customerB = new Customer(1, "Nataly");
+            Customer customerC = new Customer(1, "Connor");
 
             Location locationA = new Location(9.923818, -84.251773);
             Location locationB = new Location(52.986375, -6.043701);
             Location locationC = new Location(54.133333, -6.433333);
 
-            userA.Location = locationA;
-            userB.Location = locationB;
-            userC.Location = locationC;
+            customerA.Location = locationA;
+            customerB.Location = locationB;
+            customerC.Location = locationC;
 
-            initialList.Add(userA);
-            initialList.Add(userB);
-            initialList.Add(userC);
+            initialList.Add(customerA);
+            initialList.Add(customerB);
+            initialList.Add(customerC);
 
             int distanceInKilometers = 100;
             Location headquatersLocation = new Location(53.339428, -6.257664);
 
-            IFilteringCriteria<User> distanceCriteria = new DistanceCriteria(headquatersLocation, distanceInKilometers);
-            IList<User> result = distanceCriteria.DoSearch(initialList);
+            IFilteringCriteria<Customer> distanceCriteria = new DistanceCriteria(headquatersLocation, distanceInKilometers);
+            IList<Customer> result = distanceCriteria.DoSearch(initialList);
 
             Assert.NotNull(result);
             Assert.Equal(2, result.Count);
-            Assert.Equal(-1, result.IndexOf(userA));
+            Assert.Equal(-1, result.IndexOf(customerA));
 
         }
         

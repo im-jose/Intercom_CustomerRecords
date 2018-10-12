@@ -78,8 +78,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserFilteringTests.cs" />
-    <Compile Include="UserProviderTest.cs" />
+    <Compile Include="CustomerFilteringTests.cs" />
+    <Compile Include="CustomerProviderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -7,38 +7,38 @@ using System.Linq;
 
 namespace Intercom.CustomerRecords.Misc
 {
-    public class UserFileReader : IUserProvider
+    public class CustomerFileReader : ICustomerProvider
     {
         private const string FILENAME = "customers.txt";
-        private readonly IUserJsonParser userParser;
+        private readonly ICustomerJsonParser customerParser;
 
-        public UserFileReader(IUserJsonParser userParser)
+        public CustomerFileReader(ICustomerJsonParser customerParser)
         {
-            this.userParser = userParser;
+            this.customerParser = customerParser;
         }
         
-        public List<User> getAllUsers()
+        public List<Customer> GetAllCustomers()
         {
-            List<User> users = new List<User>();
-            string[] lines = ReadUsersFile();
+            List<Customer> customers = new List<Customer>();
+            string[] lines = ReadCustomersFile();
 
             if (lines != null && lines.Count() > 0)
             {
                 foreach (string line in lines)
                 {
-                    User user = userParser.ParseJsonLine(line);
-                    if(null != user)
+                    Customer customer = customerParser.ParseJsonLine(line);
+                    if(null != customer)
                     {
-                        users.Add(user);
+                        customers.Add(customer);
                     }
                 }
             }
 
-            List<User> sortedUserList = users.OrderBy(x => x.Id).ToList();
-            return sortedUserList;
+            List<Customer> sortedCustomerList = customers.OrderBy(x => x.Id).ToList();
+            return sortedCustomerList;
         }
 
-        private static string[] ReadUsersFile()
+        private static string[] ReadCustomersFile()
         {
             string filePath = Path.Combine(Environment.CurrentDirectory, @"Data\", FILENAME);
 

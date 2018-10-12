@@ -12,28 +12,28 @@ namespace Intercom.CustomerRecords.Services
 {
     public class CustomerService : ICustomerService
     {
-        IList<User> customerList;
-        IUserProvider userProvider;
+        IList<Customer> customerList;
+        ICustomerProvider customerProvider;
 
-        public CustomerService(IUserProvider userProvider)
+        public CustomerService(ICustomerProvider customerProvider)
         {
-            this.userProvider = userProvider;
+            this.customerProvider = customerProvider;
         }
 
-        public IList<User> GetAllUsers()
+        public IList<Customer> GetAllCustomers()
         {
             if(null == this.customerList)
             {
-                this.customerList = this.userProvider.getAllUsers();
+                this.customerList = this.customerProvider.GetAllCustomers();
             }
 
             return this.customerList;
         }
 
-        public IList<User> FindUsersByDistance(Location headquatersLocation, int distanceInKilometers)
+        public IList<Customer> FindCustomersByDistance(Location headquatersLocation, int distanceInKilometers)
         {
-            IFilteringCriteria<User> distanceCriteria = new DistanceCriteria(headquatersLocation, distanceInKilometers);
-            return distanceCriteria.DoSearch(GetAllUsers());
+            IFilteringCriteria<Customer> distanceCriteria = new DistanceCriteria(headquatersLocation, distanceInKilometers);
+            return distanceCriteria.DoSearch(GetAllCustomers());
         }
     }
 }

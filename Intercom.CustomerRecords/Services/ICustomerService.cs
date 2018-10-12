@@ -5,7 +5,7 @@ namespace Intercom.CustomerRecords.Services
 {
     public interface ICustomerService
     {
-        IList<User> GetAllUsers();
-        IList<User> FindUsersByDistance(Location headquatersLocation, int distanceInKilometers);
+        IList<Customer> GetAllCustomers();
+        IList<Customer> FindCustomersByDistance(Location headquatersLocation, int distanceInKilometers);
     }
 }

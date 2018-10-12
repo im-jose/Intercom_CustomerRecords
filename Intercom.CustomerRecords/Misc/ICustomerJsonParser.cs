@@ -2,8 +2,8 @@
 
 namespace Intercom.CustomerRecords.Misc
 {
-    public interface IUserJsonParser
+    public interface ICustomerJsonParser
     {
-        User ParseJsonLine(string jsonText);
+        Customer ParseJsonLine(string jsonText);
     }
 }

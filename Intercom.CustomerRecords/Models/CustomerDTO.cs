@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Intercom.CustomerRecords.Models
 {
-    public class UserDTO
+    public class CustomerDTO
     {
         public int user_id { get; set; }
         public string name { get; set; }

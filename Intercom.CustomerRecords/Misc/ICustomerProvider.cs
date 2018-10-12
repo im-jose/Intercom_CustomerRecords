@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Intercom.CustomerRecords.Misc
 {
-    public interface IUserProvider
+    public interface ICustomerProvider
     {
-        List<User> getAllUsers();
+        List<Customer> GetAllCustomers();
     }
 }

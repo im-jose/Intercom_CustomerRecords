@@ -10,16 +10,16 @@ using Xunit;
 
 namespace Intercom.CustomerRecords.Tests
 {
-    public class UserProviderTest
+    public class CustomerProviderTest
     {
         [Fact]
-        public void GetAllUsers_ReturnsExpectedResults()
+        public void GetAllCustomer_ReturnsExpectedResults()
         {
-            var mockJsonParser = new Mock<IUserJsonParser>();
-            mockJsonParser.Setup(x => x.ParseJsonLine(It.IsAny<string>())).Returns(() => new User(1, "John Doe"));
+            var mockJsonParser = new Mock<ICustomerJsonParser>();
+            mockJsonParser.Setup(x => x.ParseJsonLine(It.IsAny<string>())).Returns(() => new Customer(1, "John Doe"));
 
-            IUserProvider userProvider = new UserFileReader(mockJsonParser.Object);
-            var result = userProvider.getAllUsers();
+            ICustomerProvider customerProvider = new CustomerFileReader(mockJsonParser.Object);
+            var result = customerProvider.GetAllCustomers();
 
             Assert.NotNull(result);
             Assert.Equal(32, result.Count);
@@ -29,8 +29,8 @@ namespace Intercom.CustomerRecords.Tests
         public void ParseJsonCustomer_ReturnsExpectedModelObject()
         {
             string json = "{\"latitude\": \"52.986375\", \"user_id\": 12, \"name\": \"Christina McArdle\", \"longitude\": \"-6.043701\"}";
-            IUserJsonParser parser = new UserJsonParser();
-            User result = parser.ParseJsonLine(json);
+            ICustomerJsonParser parser = new CustomerJsonParser();
+            Customer result = parser.ParseJsonLine(json);
 
             Assert.NotNull(result);
             Assert.Equal("Christina McArdle", result.Name);

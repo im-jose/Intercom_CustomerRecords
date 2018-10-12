@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace Intercom.CustomerRecords.Misc
 {
-    public class UserJsonParser : IUserJsonParser
+    public class CustomerJsonParser : ICustomerJsonParser
     {
-        public User ParseJsonLine(string jsonText)
+        public Customer ParseJsonLine(string jsonText)
         {
-            UserDTO dto = null;
+            CustomerDTO dto = null;
 
             try
             {
-                dto = JsonConvert.DeserializeObject<UserDTO>(jsonText);
-                return GetUserModel(dto);
+                dto = JsonConvert.DeserializeObject<CustomerDTO>(jsonText);
+                return GetCustomerModel(dto);
             }
             catch (Exception)
             {
@@ -27,12 +27,12 @@ namespace Intercom.CustomerRecords.Misc
             }
         }
 
-        private static User GetUserModel(UserDTO dto)
+        private static Customer GetCustomerModel(CustomerDTO dto)
         {
             Location location = new Location(latitude: dto.latitude, longitude: dto.longitude);
-            User user = new User(dto.user_id, dto.name);
-            user.Location = location;
-            return user;
+            Customer customer = new Customer(dto.user_id, dto.name);
+            customer.Location = location;
+            return customer;
         }
     }
 }

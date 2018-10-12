@@ -17,9 +17,9 @@ namespace Intercom.CustomerRecords.Controller
             this.customerService = customerService;
         }
 
-        internal IList<User> getUsersByDistance(Location headquatersLocation, int distanceInKilometers)
+        internal IList<Customer> GetCustomersByDistance(Location headquatersLocation, int distanceInKilometers)
         {
-            return this.customerService.FindUsersByDistance(headquatersLocation, distanceInKilometers);
+            return this.customerService.FindCustomersByDistance(headquatersLocation, distanceInKilometers);
         }
     }
 }

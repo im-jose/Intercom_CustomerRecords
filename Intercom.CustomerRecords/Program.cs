@@ -18,8 +18,8 @@ namespace Intercom.CustomerRecords
         {
             //Initialize DI container & register dependencies
             container = new Container();
-            container.Register<IUserJsonParser, UserJsonParser>();
-            container.Register<IUserProvider, UserFileReader>();
+            container.Register<ICustomerJsonParser, CustomerJsonParser>();
+            container.Register<ICustomerProvider, CustomerFileReader>();
             container.Register<ICustomerService, CustomerService>();
             container.Register<CustomerController>(() => new CustomerController(container.GetInstance<ICustomerService>()));
         }
@@ -41,32 +41,32 @@ namespace Intercom.CustomerRecords
 
         private static void StartCustomerFiltering(double headquatersLatitude, double headquatersLongitude, int distanceInKilometers)
         {
-            IList<User> users = FilterCustomerBase(headquatersLatitude, headquatersLongitude, distanceInKilometers);
+            IList<Customer> customers = FilterCustomerBase(headquatersLatitude, headquatersLongitude, distanceInKilometers);
 
-            PresentCustomerData(users);
+            PresentCustomerData(customers);
         }
 
-        private static IList<User> FilterCustomerBase(double headquatersLatitude, double headquatersLongitude, int distanceInKilometers)
+        private static IList<Customer> FilterCustomerBase(double headquatersLatitude, double headquatersLongitude, int distanceInKilometers)
         {
             Location headquatersLocation = new Location(headquatersLatitude, headquatersLongitude);
 
             CustomerController controller = container.GetInstance<CustomerController>();
-            IList<User> users = controller.getUsersByDistance(headquatersLocation, distanceInKilometers);
+            IList<Customer> customers = controller.GetCustomersByDistance(headquatersLocation, distanceInKilometers);
 
-            return users;
+            return customers;
         }
 
-        private static void PresentCustomerData(IList<User> users)
+        private static void PresentCustomerData(IList<Customer> customers)
         {
-            if (users == null || users.Count == 0)
+            if (customers == null || customers.Count == 0)
             {
-                Console.WriteLine("Couldn't find any users that met the search criteria");
+                Console.WriteLine("Couldn't find any customers that met the search criteria");
                 return;
             }
 
-            foreach (User user in users)
+            foreach (Customer customer in customers)
             {
-                Console.WriteLine(String.Format("Id: {0}, Name: {1}", user.Id, user.Name));
+                Console.WriteLine(String.Format("Id: {0}, Name: {1}", customer.Id, customer.Name));
             }
         }
 

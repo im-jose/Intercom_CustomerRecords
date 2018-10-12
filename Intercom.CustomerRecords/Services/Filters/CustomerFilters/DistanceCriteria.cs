@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Intercom.CustomerRecords.Services.Filters.CustomerFilters
 {
-    public class DistanceCriteria : IFilteringCriteria<User>
+    public class DistanceCriteria : IFilteringCriteria<Customer>
     {
         int targetDistanceInKm;
         Location headquatersLocation;
@@ -19,20 +19,20 @@ namespace Intercom.CustomerRecords.Services.Filters.CustomerFilters
             this.targetDistanceInKm = targetDistanceInKm;
         }
 
-        public IList<User> DoSearch(IList<User> initialList)
+        public IList<Customer> DoSearch(IList<Customer> initialList)
         {
             if (null == initialList || initialList.Count == 0)
             {
                 return initialList;
             }
 
-            IList<User> filteredList = new List<User>();
-            foreach(User user in initialList)
+            IList<Customer> filteredList = new List<Customer>();
+            foreach(Customer customer in initialList)
             {
-                double distance = DistanceCalculatorHelper.CalculateDistance(headquatersLocation, user.Location);
+                double distance = DistanceCalculatorHelper.CalculateDistance(headquatersLocation, customer.Location);
                 if(distance <= targetDistanceInKm)
                 {
-                    filteredList.Add(user);
+                    filteredList.Add(customer);
                 }
             }
 
