@@ -49,5 +49,9 @@ Has a default (hardcoded) file location that is used if the file location (full 
 Relies on NewtonSoft.Json library to convert json to a model object.
 Swallows exception on purpose so if a line is malformatted we can still read the rest of the file.
 
+### DistanceCriteria 
+Follows a filter pattern implementing an interface (IFilteringCriteria), so that we can add other criterias and combine them if needed.
+
+Uses a helper class: DistanceCalculatorHelper that implements the Harvesine distance function to calculate the distance between two points.
 
 
