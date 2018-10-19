@@ -66,7 +66,7 @@ namespace Intercom.CustomerRecords
 
             foreach (Customer customer in customers)
             {
-                Console.WriteLine(String.Format("Id: {0}, Name: {1}", customer.Id, customer.Name));
+                Console.WriteLine(string.Format("Id: {0}, Name: {1}", customer.Id, customer.Name));
             }
         }
 
